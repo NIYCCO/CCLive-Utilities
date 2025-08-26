@@ -1,23 +1,27 @@
 {
-	"required": true,
-	"package": "net.felix.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin",
-		"DrawContextMixin",
-		"HandledScreenMixin",
-		"MouseScrollMixin",
-		"SearchBarMixin",
-		"SearchBarInputMixin",
-		"ActionBarMixin",
-		"LivingEntityMixin",
-		"BossBarMixin",
-		"TitleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	}
+  "required": true,
+  "package": "net.felix.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ActionBarMixin",
+    "BossBarMixin",
+    "DrawContextMixin",
+    "ExampleMixin",
+    "HandledScreenMixin",
+    "LivingEntityMixin",
+    "MouseScrollMixin",
+    "SearchBarInputMixin",
+    "SearchBarMixin",
+    "TitleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "ChatScreenMixin",
+    "ScreensMixin"
+  ]
 }
