@@ -85,6 +85,9 @@ public class CCLiveUtilitiesConfig {
     @SerialEntry
     public boolean showMaterialTooltips = true; // Material tooltips in hover events
     
+    @SerialEntry
+    public boolean showSchmiedezustaendeInAusrüstungsMenü = true; // Schmiedezustände in Ausrüstungs-Menüs anzeigen
+    
     // Informationen Utility Settings
     @SerialEntry
     public boolean informationenUtilityEnabled = true; // Informationen Utility aktivieren
@@ -94,6 +97,10 @@ public class CCLiveUtilitiesConfig {
     
     @SerialEntry
     public boolean showEbenenInNormalInventories = true; // Ebenen in normalen Inventaren anzeigen
+    
+
+    
+
     
     @SerialEntry
     public int schmiedTrackerX = 5; // X-Position des Schmied Trackers (optimiert)
@@ -376,12 +383,6 @@ public class CCLiveUtilitiesConfig {
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
                         .option(Option.<Boolean>createBuilder()
-                                .name(Text.literal("Material Ebenen anzeigen"))
-                                .description(OptionDescription.of(Text.literal("Ebenen-Informationen in Material-Tooltips anzeigen oder ausblenden")))
-                                .binding(true, () -> HANDLER.instance().showMaterialTooltips, newVal -> HANDLER.instance().showMaterialTooltips = newVal)
-                                .controller(TickBoxControllerBuilder::create)
-                                .build())
-                        .option(Option.<Boolean>createBuilder()
                                 .name(Text.literal("Hide Uncraftable Button"))
                                 .description(OptionDescription.of(Text.literal("Hide Uncraftable Button in Baupläne Inventaren aktivieren")))
                                 .binding(true, () -> HANDLER.instance().hideUncraftableEnabled, newVal -> HANDLER.instance().hideUncraftableEnabled = newVal)
@@ -556,6 +557,7 @@ public class CCLiveUtilitiesConfig {
                                 .binding(true, () -> HANDLER.instance().showEbenenInNormalInventories, newVal -> HANDLER.instance().showEbenenInNormalInventories = newVal)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
+
                         .group(OptionGroup.createBuilder()
                                 .name(Text.literal("Aspekt Info"))
                                 .option(Option.<Boolean>createBuilder()
