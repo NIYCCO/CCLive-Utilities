@@ -21,6 +21,6 @@
     "requireAnnotations": true
   },
   "client": [
-    "ChatScreenMixin"
+    "ChatScreenMixin",
   ]
 }

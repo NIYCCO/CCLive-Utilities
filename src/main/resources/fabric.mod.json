@@ -20,6 +20,9 @@
 		"main": [
 			"net.felix.CCLiveUtilities"
 		],
+        "client": [
+            "net.felix.utilities.EmojiRegistry"
+        ],
 		"modmenu": [
 			"net.felix.ModMenuIntegration"
 		],
