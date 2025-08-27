@@ -21,6 +21,9 @@
     "requireAnnotations": true
   },
   "client": [
+    "ChatInputSuggestorAccessor",
+    "ChatInputSuggestorMixin",
     "ChatScreenMixin",
+    "SuggestionWindowMixin"
   ]
 }
