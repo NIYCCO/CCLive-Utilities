@@ -29,6 +29,7 @@ public class EmojiRegistry implements ClientModInitializer {
     public static final List<String> EMOJI_NAMES = List.of(new String[]{"smiley", "smile", "grin", "laughing", "sweat_smile", "joy", "rofl", "blush", "innocent", "slight_smile", "upside_down", "wink", "relieved", "heart_eyes", "kissing_closed_eyes", "yum", "tongue_close_eyes", "money_mouth", "hugging", "nerd", "sunglasses", "freezing_clown", "smirk", "unamused", "persevere", "pensive", "confused", "slight_frown", "frowning2", "cold_face", "hot_face", "smiling_imp", "weary", "triumph", "angry", "rage", "neutral_face", "expressionless", "hushed", "frowning", "anguished", "open_mouth", "astonished", "flushed", "scream", "fearful", "cold_sweat", "disappointed_relieved", "sweat", "sob", "snod", "crying", "sweating_pray", "sleeping", "rolling_eyes", "thinking", "lying", "grimacing", "nauseated", "vomiting", "sneezing", "mask", "thermometer", "bandage", "raised_eyebrow", "star_struck", "exploding", "monocle", "shushing", "zany", "worried", "hand_over_mouth"});
     public static Map<String, String> snippets = new HashMap<>();
     public static ArrayList<String> emojiCodesCombined = new ArrayList<>();
+    public static ArrayList<String> emojiPreview = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
@@ -42,6 +43,7 @@ public class EmojiRegistry implements ClientModInitializer {
             public void reload(ResourceManager manager) {
                 snippets.clear();
                 emojiCodesCombined.clear();
+                emojiPreview.clear();
 
                 final int totalNames = EMOJI_NAMES.size();
                 int mapped = 0;
@@ -91,8 +93,7 @@ public class EmojiRegistry implements ClientModInitializer {
 
                                     snippets.put(ch, name);         // Key: Zeichen, Value: Emoji-Name
                                     emojiCodesCombined.add(":" + name + ":" + " " + ch);
-                                    //TODO Remove debug print
-                                    System.out.println(ch + " -> :" + name + ":");
+                                    emojiPreview.add(ch);
 
                                     idx++;
                                     mapped++;

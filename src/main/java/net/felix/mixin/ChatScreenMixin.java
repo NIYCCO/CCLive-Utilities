@@ -4,11 +4,16 @@ package net.felix.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.felix.CCLiveUtilities;
-import net.felix.accessor.ScreenAccess;
 import net.felix.interfaces.SymbolInsertable;
+import net.felix.utilities.EmojiRegistry;
+import net.felix.widget.EmojiButtonWidget;
 import net.felix.widget.EmojiIconButtonWidget;
+import net.felix.widget.EmojiSelectionPanel;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
@@ -36,6 +41,9 @@ public class ChatScreenMixin extends Screen implements SymbolInsertable {
     @Unique
     private EmojiIconButtonWidget emojiIconButtonWidget;
 
+    @Unique
+    EmojiSelectionPanel emojiSelectionPanel;
+
     protected ChatScreenMixin(Text title) {
         super(title);
     }
@@ -46,14 +54,37 @@ public class ChatScreenMixin extends Screen implements SymbolInsertable {
         int emojiButtonX = this.width - padding - 12;
         int emojiButtonY = this.height - padding - 12;
 
+        int panelHeight = 200;
+        int panelWidth = 120;
+
+        int panelX = this.width - panelWidth - padding;
+        int panelY = emojiButtonY - padding - panelHeight;
+
+        emojiSelectionPanel = new EmojiSelectionPanel(panelX, panelY, panelWidth, panelHeight);
+        this.addDrawableChild(emojiSelectionPanel);
+
+        GridWidget grid = new GridWidget();
+        grid.setSpacing(2);
+        GridWidget.Adder adder = grid.createAdder(7);
+
+        for (String emoji : EmojiRegistry.snippets.keySet()) {
+           EmojiButtonWidget button = new EmojiButtonWidget(0, 0, 15, 15, Text.of(emoji));
+            adder.add(button);
+        }
+
+        grid.setX(panelX + padding);
+        grid.setY(panelY + 12 + padding);
+        grid.refreshPositions();
+
+        grid.forEachChild(emojiSelectionPanel::addChildren);
+
         emojiIconButtonWidget = new EmojiIconButtonWidget(12, 12, ScreenTexts.EMPTY, 12, 12, TEXTURE, button -> {
             button.setOutlined(!button.isOutlined());
+            emojiSelectionPanel.toggleVisible();
         }, null);
 
         emojiIconButtonWidget.setPosition(emojiButtonX, emojiButtonY);
         this.addDrawableChild(emojiIconButtonWidget);
-
-
     }
 
     @Inject(method = "init", at = @At(value = "RETURN"))
